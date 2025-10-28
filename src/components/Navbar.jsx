@@ -97,7 +97,7 @@ export default function Navbar() {
           <>
             {/* EFFETTO SFOCATO */}
             <motion.div
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[90]"
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-90"
               onClick={() => setIsOpen(false)}
               variants={backdropVariants}
               initial="hidden"
@@ -110,7 +110,7 @@ export default function Navbar() {
             <motion.div
               className="fixed top-1/2 left-1/2 -translate-x-1/2 
                          w-[90vw] max-w-sm h-auto min-h-[50vh] max-h-[550px]
-                         dark:bg-[#1C1C1C] bg-white/30 rounded-3xl z-[100]
+                         dark:bg-[#1C1C1C] bg-white/30 rounded-3xl z-100
                          flex flex-col justify-between p-6 overflow-hidden"
               variants={modalVariants}
               initial="hidden"
