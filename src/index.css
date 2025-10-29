@@ -1,20 +1,23 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background: url("background.gif") repeat center top fixed;
-    background-size: auto 33.33%; /* 1/3 dell’altezza per averne 3 in verticale */
-    position: relative;
-    z-index: 0;
-    color: #fff; /* testi leggibili */
-  }
 
-  body::before {
-    content: "";
-    position: fixed; /* fisso sopra tutta la pagina */
-    inset: 0; /* top, right, bottom, left a 0 */
-    background: rgba(0, 0, 0, 0.7); /* velo nero al 50% */
-    z-index: -1; /* resta dietro i contenuti ma sopra la gif */
-  }
+
+/* anche quando Tailwind attiva la classe dark */
+.dark body {
+  background: url("background.gif") repeat center top fixed;
+  background-size: auto 33.33%;
+  position: relative;
+  z-index: 0;
+  color: #fff;
 }
+
+.dark body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: -1;
+}
+
