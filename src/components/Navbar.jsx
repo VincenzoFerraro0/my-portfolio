@@ -28,15 +28,15 @@ const staggerContainerVariants = {
     transition: { delayChildren: 0.1, staggerChildren: 0.08 }
   },
 };
+const links = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'Blogs', href: '/blogs' },
+];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const links = [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Projects', href: '/projects' },
-    { name: 'Blogs', href: '/blogs' },
-  ];
 
   return (
     <>
