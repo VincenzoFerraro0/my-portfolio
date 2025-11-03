@@ -1,29 +1,7 @@
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
+import {projects} from '../lib/data';
 
-const projects = [
-  {
-    title: 'Personal Portfolio',
-    description: 'Un portfolio interattivo creato con React, Tailwind e Framer Motion.',
-    tech: ['React', 'Framer Motion', 'TailwindCSS'],
-    link: 'https://tuo-portfolio.it',
-    image: 'https://via.placeholder.com/600x400?text=Portfolio+Preview',
-  },
-  {
-    title: 'E-commerce UI',
-    description: 'Prototipo moderno di interfaccia e-commerce con focus su UX e animazioni.',
-    tech: ['Next.js', 'TypeScript', 'Stripe API'],
-    link: 'https://ecommerce-demo.it',
-    image: 'https://via.placeholder.com/600x400?text=E-commerce+UI',
-  },
-  {
-    title: 'AI Chatbot',
-    description: 'Assistente intelligente sviluppato con OpenAI API e Node.js.',
-    tech: ['Node.js', 'OpenAI API', 'Express'],
-    link: 'https://chatbot-demo.it',
-    image: 'https://via.placeholder.com/600x400?text=AI+Chatbot',
-  },
-];
 
 const container = {
   hidden: { opacity: 0 },

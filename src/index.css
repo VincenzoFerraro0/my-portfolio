@@ -4,11 +4,17 @@
 
 
 
-/* anche quando Tailwind attiva la classe dark */
+/* Background per modalità light (default) */
+body {
+  background-color: #f6f6f6;
+}
+
+/* Background per modalità dark */
 .dark body {
   background: url("/background.gif") repeat center top;
   background-size: auto 33.33%;
-  background-attachment: scroll; /* ✅ compatibile iOS */
+  background-attachment: scroll;
+  /* ✅ compatibile iOS */
   color: #fff;
   position: relative;
   overflow-x: hidden;
@@ -23,7 +29,8 @@
   pointer-events: none;
   z-index: -1;
 }
-.dark > * {
+
+.dark>* {
   position: relative;
   z-index: 1;
 }

@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-scroll'; // 👈 aggiungi questa import
+import { Link } from 'react-scroll'; 
 import fotoProfilo from '../assets/img/foto-profilo.png';
 import ButtonContact from '../components/ButtonContact';
 import { Menu, X } from 'lucide-react';
 import OnlineStatusIndicator from './OnlineStatusIndicator';
+import { links } from '../lib/data';
 
 const MenuIcon = Menu;
 const XIcon = X;
@@ -30,11 +31,6 @@ const staggerContainerVariants = {
   },
 };
 
-const links = [
-  { name: 'About', to: 'about' },
-  { name: 'Projects', to: 'projects' },
-  { name: 'Skills', to: 'skills' },
-];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);

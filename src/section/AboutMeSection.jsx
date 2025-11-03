@@ -1,4 +1,4 @@
-import { FaXTwitter, FaInstagram, FaBehance, FaDribbble } from "react-icons/fa6";
+import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import Memoji from "../assets/img/memoji-Trasparente.png";
 
 export default function AboutMeSection() {
@@ -31,17 +31,11 @@ export default function AboutMeSection() {
 
         {/* Social Icons */}
         <div className="flex space-x-5 text-neutral-400 text-2xl mt-8">
-          <a href="#" className="hover:text-black dark:hover:text-white transition">
-            <FaXTwitter />
+          <a href="https://www.linkedin.com/in/vincenzo-ferraro-567a60380" target="_blank" rel="noopener noreferrer" className="hover:text-blue-700 transition">
+            <FaLinkedin />
           </a>
-          <a href="#" className="hover:text-pink-600 transition">
-            <FaInstagram />
-          </a>
-          <a href="#" className="hover:text-blue-600 transition">
-            <FaBehance />
-          </a>
-          <a href="#" className="hover:text-pink-500 transition">
-            <FaDribbble />
+          <a href="https://github.com/VincenzoFerraro0" target="_blank" rel="noopener noreferrer" className="hover:text-black transition">
+            <FaGithub />
           </a>
         </div>
       </div>
