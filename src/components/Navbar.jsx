@@ -5,7 +5,7 @@ import fotoProfilo from '../assets/img/foto-profilo.png';
 import ButtonContact from '../components/ButtonContact';
 import { Menu, X } from 'lucide-react';
 import OnlineStatusIndicator from './OnlineStatusIndicator';
-import { links } from '../lib/data';
+import { menuItems } from '../lib/data';
 
 const MenuIcon = Menu;
 const XIcon = X;
@@ -52,7 +52,7 @@ export default function Navbar() {
 
         {/* Links Desktop */}
         <div className="hidden space-x-8 font-medium text-gray-800 lg:flex  dark:text-gray-200">
-          {links.map((link) => (
+          {menuItems.map((link) => (
             <motion.div
               key={link.name}
               className="relative cursor-pointer"
@@ -84,7 +84,7 @@ export default function Navbar() {
 
         <div className="lg:hidden text-white bg-indigo-500 dark:bg-[rgb(208,255,113)] dark:text-black rounded-full">
           <button onClick={() => setIsOpen(true)} className="flex items-center p-2 align-items-center">
-            <MenuIcon className="w-5 h-5" />
+            <MenuIcon className="w-4 h-4" />
           </button>
         </div>
       </nav>
@@ -134,7 +134,7 @@ export default function Navbar() {
                 </div>
 
                 <div className="flex flex-col items-center my-10 space-y-6 text-3xl font-medium text-white">
-                  {links.map((link) => (
+                  {menuItems.map((link) => (
                     <Link
                       key={link.name}
                       to={link.to}

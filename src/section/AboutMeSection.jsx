@@ -5,7 +5,7 @@ export default function AboutMeSection() {
   return (
     <section
       id="about"
-      className="min-h-screen text-gray-800 dark:text-gray-200 flex flex-col-reverse md:flex-row items-center justify-center px-8 pt-20 gap-12"
+      className="min-h-screen text-gray-800 dark:text-gray-200 flex flex-col-reverse md:flex-row items-center justify-center px-8 pt-18 gap-12"
     >
       {/* Left Text Section */}
       <div className="max-w-lg">
@@ -13,12 +13,12 @@ export default function AboutMeSection() {
           chi sono
         </h2>
 
-        <h2 className="text-2xl font-semibold mb-4 uppercase">
+        <h1 className="text-2xl font-semibold mb-4 uppercase">
           vincenzo ferraro
-        </h2>
+        </h1>
 
         <p className="leading-relaxed mb-4">
-          👋 Ciao! Sono Vincenzo, un appassionato di programmazione nato dalla curiosità di capire come funziona il web.
+          Ciao! Sono Vincenzo, un appassionato di programmazione nato dalla curiosità di capire come funziona il web.
         </p>
 
         <p className="leading-relaxed mb-4">
