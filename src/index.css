@@ -27,9 +27,3 @@
   position: relative;
   z-index: 1;
 }
-
-/* 💫 Transizione dark/light */
-body {
-  transition: background 0.4s ease, color 0.4s ease;
-}
-
