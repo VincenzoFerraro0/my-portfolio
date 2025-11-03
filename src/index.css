@@ -6,18 +6,30 @@
 
 /* anche quando Tailwind attiva la classe dark */
 .dark body {
-  background: url("background.gif") repeat center top fixed;
+  background: url("/background.gif") repeat center top;
   background-size: auto 33.33%;
-  position: relative;
-  z-index: 0;
+  background-attachment: scroll; /* ✅ compatibile iOS */
   color: #fff;
+  position: relative;
+  overflow-x: hidden;
+  z-index: 0;
 }
 
 .dark body::before {
   content: "";
-  position: fixed;
+  position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.65);
+  pointer-events: none;
   z-index: -1;
+}
+.dark > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* 💫 Transizione dark/light */
+body {
+  transition: background 0.4s ease, color 0.4s ease;
 }
 

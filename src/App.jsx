@@ -1,18 +1,25 @@
-import { Routes, Route } from "react-router-dom"
-import DefaultLayout from "./layout/DefaultLayout"
-import Homepage from "./pages/Homepage"
-import AboutMePage from "./pages/AboutMePage"
+import Navbar from "./components/Navbar"
+import ToggleSwitch from "./components/ToggleSwitch"
+import AboutMeSection from "./section/AboutMeSection"
+import ProjectsSection from "./section/ProjectsSection"
+
 function App() {
-  
+
 
   return (
-  <Routes>
-    <Route element={<DefaultLayout/>}>
-        <Route path="/" element={<Homepage/>}/>
-        <Route path="/about" element={<AboutMePage/>}/>
-    </Route>
-  </Routes>
-     
+    <>
+      <Navbar />
+      {/* Contenuto principale */}
+      <main className="">
+        <AboutMeSection />
+        <ProjectsSection />
+
+      </main>
+      <ToggleSwitch />
+
+    </>
+
+
   )
 }
 

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-scroll'; // 👈 aggiungi questa import
 import fotoProfilo from '../assets/img/foto-profilo.png';
 import ButtonContact from '../components/ButtonContact';
 import { Menu, X } from 'lucide-react';
@@ -28,11 +29,11 @@ const staggerContainerVariants = {
     transition: { delayChildren: 0.1, staggerChildren: 0.08 }
   },
 };
+
 const links = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Projects', href: '/projects' },
-  { name: 'Skills', href: '/skills' },
+  { name: 'About', to: 'about' },
+  { name: 'Projects', to: 'projects' },
+  { name: 'Skills', to: 'skills' },
 ];
 
 export default function Navbar() {
@@ -40,13 +41,11 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ===== NAVBAR DESKTOP ===== */}
       <nav className="fixed top-4 left-1/2 -translate-x-1/2 flex items-center 
                       justify-between w-[70%] lg:max-w-[500px] max-w-[350px] px-3 py-2 
                       rounded-4xl border border-gray-200 bg-white/80 z-50 
                       dark:bg-[rgba(15,15,15,0.9)]">
         
-        {/* Avatar */}
         <img
           src={fotoProfilo}
           alt="Portfolio Avatar"
@@ -55,32 +54,38 @@ export default function Navbar() {
 
         <OnlineStatusIndicator />
 
-        {/* Links Desktop con animazione hover */}
-        <div className="hidden space-x-6 font-medium text-gray-800 lg:flex dark:text-gray-200">
+        {/* Links Desktop */}
+        <div className="hidden space-x-8 font-medium text-gray-800 lg:flex  dark:text-gray-200">
           {links.map((link) => (
-            <motion.a
+            <motion.div
               key={link.name}
-              href={link.href}
-              className="relative"
-              whileHover={{ y: -2 }} // piccolo spostamento verso l'alto
+              className="relative cursor-pointer"
+              whileHover={{ y: -2 }}
               transition={{ duration: 0.25, ease: "easeInOut" }}
             >
-              {link.name}
+              <Link
+                to={link.to}
+                smooth={true}
+                duration={600}
+                offset={-100} // per compensare la navbar fissa
+                spy={true}
+                className="cursor-pointer"
+              >
+                {link.name}
+              </Link>
               <motion.span
-                className="absolute left-0 bottom-0 h-2px w-full bg-indigo-500 dark:bg-[rgb(208,255,113)] origin-left scale-x-0"
+                className="absolute left-0 bottom-0 h-[2px] w-full bg-indigo-500 dark:bg-[rgb(208,255,113)] origin-left scale-x-0"
                 whileHover={{ scaleX: 1 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
               />
-            </motion.a>
+            </motion.div>
           ))}
         </div>
 
-        {/* Contact Button Desktop */}
         <div className="hidden lg:block">
           <ButtonContact />
         </div>
 
-        {/* Bottone Toggle Menu Mobile */}
         <div className="lg:hidden text-white bg-indigo-500 dark:bg-[rgb(208,255,113)] dark:text-black rounded-full">
           <button onClick={() => setIsOpen(true)} className="flex items-center p-2 align-items-center">
             <MenuIcon className="w-5 h-5" />
@@ -92,7 +97,6 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Sfocatura sfondo */}
             <motion.div
               className="fixed inset-0 bg-black/50 backdrop-blur-sm z-90"
               onClick={() => setIsOpen(false)}
@@ -103,7 +107,6 @@ export default function Navbar() {
               transition={{ duration: 0.3 }}
             />
 
-            {/* Modale */}
             <motion.div
               className="fixed top-1/2 left-1/2 -translate-x-1/2 
                          w-[90vw] max-w-sm h-auto min-h-[50vh] max-h-[550px]
@@ -120,7 +123,6 @@ export default function Navbar() {
                 initial="hidden"
                 animate="visible"
               >
-                {/* Header */}
                 <div className="flex items-center justify-between">
                   <img
                     src={fotoProfilo}
@@ -135,21 +137,22 @@ export default function Navbar() {
                   </button>
                 </div>
 
-                {/* Link centrali */}
                 <div className="flex flex-col items-center my-10 space-y-6 text-3xl font-medium text-white">
                   {links.map((link) => (
-                    <a
+                    <Link
                       key={link.name}
-                      href={link.href}
+                      to={link.to}
+                      smooth={true}
+                      duration={600}
+                      offset={-100}
                       onClick={() => setIsOpen(false)}
-                      className="hover:text-[rgb(208,255,113)] transition"
+                      className="hover:text-[rgb(208,255,113)] transition cursor-pointer"
                     >
                       {link.name}
-                    </a>
+                    </Link>
                   ))}
                 </div>
 
-                {/* Contact Button Mobile */}
                 <motion.div className="flex justify-center">
                   <ButtonContact staticGradient />
                 </motion.div>
