@@ -32,7 +32,7 @@ const links = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
   { name: 'Projects', href: '/projects' },
-  { name: 'Blogs', href: '/blogs' },
+  { name: 'Skills', href: '/skills' },
 ];
 
 export default function Navbar() {

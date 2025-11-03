@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom"
 import DefaultLayout from "./layout/DefaultLayout"
 import Homepage from "./pages/Homepage"
-import AboutMe from "./pages/AboutMe"
+import AboutMePage from "./pages/AboutMePage"
 function App() {
   
 
@@ -9,7 +9,7 @@ function App() {
   <Routes>
     <Route element={<DefaultLayout/>}>
         <Route path="/" element={<Homepage/>}/>
-        <Route path="/about" element={<AboutMe/>}/>
+        <Route path="/about" element={<AboutMePage/>}/>
     </Route>
   </Routes>
      
