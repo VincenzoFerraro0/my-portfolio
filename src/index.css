@@ -12,7 +12,7 @@ body {
 /* Background per modalità dark */
 .dark body {
   background: url("/background.gif") repeat center top;
-  background-size: auto 33.33%;
+  background-size: auto contain;
   background-attachment: scroll;
   /* ✅ compatibile iOS */
   color: #fff;
@@ -21,6 +21,7 @@ body {
   z-index: 0;
 }
 
+  /* testi leggibili */
 .dark body::before {
   content: "";
   position: absolute;
