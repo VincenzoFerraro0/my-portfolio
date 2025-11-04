@@ -40,17 +40,11 @@ export default function ContactSection() {
           </h2>
 
           <p className="text-lg leading-relaxed mb-4">
-            Sono sempre aperto a nuove opportunità e collaborazioni.  
-            Non esitare a contattarmi per discutere di progetti interessanti,  
-            condividere idee o semplicemente per fare una chiacchierata sul mondo dello sviluppo web!
+            Sono sempre aperto a nuove opportunità e collaborazioni: che si tratti di un progetto,
+            un consiglio tecnico o un’idea creativa, mi piace confrontarmi e costruire insieme qualcosa di straordinario.
+            La passione per la tecnologia, il design e la crescita continua mi spinge a dare sempre il massimo in ogni sfida.
           </p>
 
-          <p className="leading-relaxed">
-            Che si tratti di un nuovo progetto, un consiglio tecnico o una collaborazione creativa,  
-            sarò felice di ascoltarti e costruire qualcosa di straordinario insieme.  
-            La passione per la tecnologia, il design e la crescita continua  
-            mi spinge a dare sempre il massimo in ogni sfida.
-          </p>
 
           {/* === SOCIAL ICONS === */}
           <div className="flex justify-center lg:justify-start space-x-6 text-neutral-400 text-3xl mt-8">
