@@ -1,16 +1,29 @@
-# React + Vite
+# Il Mio Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Un sito web portfolio personale che mostra i miei progetti e competenze.
 
-Currently, two official plugins are available:
+## 📋 Panoramica
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Questo progetto è un sito web portfolio responsive costruito per presentare il mio lavoro, le mie competenze e la mia esperienza professionale. Una vetrina digitale che riflette il mio percorso professionale e le mie capacità nel campo dello sviluppo web.
 
-## React Compiler
+## 🚀 Caratteristiche
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Design responsive che si adatta a tutti i dispositivi
+- Vetrina dei progetti con descrizioni dettagliate
+- Sezione competenze con le mie specializzazioni tecniche
+- Modulo di contatto per opportunità professionali
+- Modalità chiara/scura per una migliore esperienza utente
+- Sezione blog con articoli tecnici e approfondimenti
 
-## Expanding the ESLint configuration
+## 🛠️ Stack Tecnologico
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- HTML5 e CSS3 per la struttura e lo stile
+- JavaScript per le interazioni dinamiche
+- React.js come framework principale
+- Tailwind CSS per un design moderno e flessibile
+- Node.js per il backend
+
+## 📞 Contatti
+
+- Email: ferrarov0@icloud.com
+- Linkedin: [Vincenzo Feraro](https://www.linkedin.com/in/vincenzo-ferraro-567a60380)

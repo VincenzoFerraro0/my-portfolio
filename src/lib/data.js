@@ -1,4 +1,6 @@
 import sitoFerraroPreview from '../assets/projects/sito-ferraro-preview.png';
+import webTobolaPreview from '../assets/projects/web-tombola-preview.png';
+import boolflixPreview from '../assets/projects/boolflix-preview.png'; // aggiungi l’immagine del progetto
 
 // FRONTEND ICONS
 import javascriptIcon from '../assets/icons/javascript.svg';
@@ -17,13 +19,12 @@ import nodeIcon from '../assets/icons/nodejs.svg';
 import expressIcon from '../assets/icons/express.svg';
 import expressIconDark from '../assets/icons/express-dark.svg';
 import mysqlIcon from '../assets/icons/mysql.svg';
-import mongoDB from '../assets/icons/mongodb.svg'
-
+import mongoDB from '../assets/icons/mongodb.svg';
 
 // TOOLS ICON
 export const toolsSkills = [
   { name: 'GitHub', iconLight: gitHub, iconDark: gitHubDark },
-  { name: 'Trello', iconLight: trello, iconDark: trello }, // stessa icona per dark/light
+  { name: 'Trello', iconLight: trello, iconDark: trello },
 ];
 
 // FRONTEND ICONS
@@ -51,13 +52,29 @@ export const menuItems = [
 ];
 
 // PROJECTS
-
 export const projects = [
   {
-    title: 'Sito - Ferraro S.R.L.S',
-    description: 'Sito web aziendale per Ferraro S.R.L.S., realizzato con stack moderno React e ottimizzato per performance, accessibilità e facilità di manutenzione.',
+    title: 'Ferraro S.R.L.S',
+    description:
+      'Sito web aziendale per Ferraro S.R.L.S., realizzato con stack moderno React e ottimizzato per performance, accessibilità e facilità di manutenzione.',
     tech: ['React', 'TailwindCSS', 'EmailJS', 'Elfsight'],
     link: 'https://www.ferrarosrls.com',
     image: sitoFerraroPreview,
-  }
+  },
+  {
+    title: 'Web Tombola',
+    description:
+      'Gioco della tombola online interattivo, realizzato in JavaScript puro con interfaccia semplice e dinamica per partite singole o di gruppo.',
+    tech: ['HTML', 'CSS', 'JavaScript'],
+    link: 'https://web-tombola.vercel.app/',
+    image: webTobolaPreview,
+  },
+  {
+    title: 'Boolflix',
+    description:
+      'Boolflix è una web app che replica le funzionalità base di Netflix, realizzata con React. Permette di esplorare un vasto catalogo di film e serie TV, con ricerca dinamica, dettagli e interfaccia responsive. Utilizza le API di TMDB per i dati.',
+    tech: ['React', 'JavaScript','TMDB API','Bootstrap'],
+    link: 'https://boolflix-demo.vercel.app/', // modifica con il link corretto
+    image: boolflixPreview,
+  },
 ];

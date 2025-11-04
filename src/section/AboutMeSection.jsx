@@ -12,7 +12,7 @@ export default function AboutMeSection() {
       className="min-h-screen flex flex-col items-center justify-center text-gray-800 dark:text-white px-8 pt-20 "
     >
       {/* Top Section: About + Memoji */}
-      <div className="flex flex-col-reverse md:flex-row items-center justify-center w-full  gap-12">
+      <div className="flex flex-col-reverse md:flex-row items-center justify-center w-full  max-w-6xl  gap-12">
         {/* Left Text Section */}
         <div className="max-w-lg text-center md:text-left">
           <h2 className="text-indigo-500 dark:text-[rgb(208,255,113)]  text-6xl md:text-7xl font-extrabold mb-6 tracking-tight uppercase">
@@ -36,7 +36,7 @@ export default function AboutMeSection() {
           </p>
 
           {/* Social Icons */}
-          <div className="flex justify-center md:justify-start space-x-5 text-neutral-400 text-2xl mt-6">
+          <div className="flex justify-center md:justify-start space-x-5 text-neutral-400 text-2xl mt-6 mb-6">
             <a
               href="https://www.linkedin.com/in/vincenzo-ferraro-567a60380"
               target="_blank"
@@ -67,7 +67,7 @@ export default function AboutMeSection() {
       </div>
 
       {/* Formazione + Certificato */}
-      <div className="flex flex-col lg:flex-row-reverse items-center justify-between w-full max-w-6xl mx-auto gap-10 px-4">
+      <div className="flex flex-col lg:flex-row-reverse items-center justify-between w-full max-w-6xl mx-auto gap-10 mt-5 px-4">
         {/* Left Text Section */}
         <div className="max-w-xl text-center lg:text-left">
           <h3 className="text-indigo-500 dark:text-[rgb(208,255,113)] text-5xl md:text-6xl font-extrabold mb-6 tracking-tight uppercase">
@@ -86,28 +86,33 @@ export default function AboutMeSection() {
             Un’esperienza immersiva che mi ha permesso di sviluppare un metodo di lavoro strutturato e collaborativo, migliorare le mie competenze tecniche e acquisire maggiore sicurezza nello sviluppo di progetti web completi.
           </p>
 
-          {/* Icons link */}
-          <div className="flex justify-center lg:justify-start space-x-6 text-neutral-400 text-2xl mt-6">
+{/* Icons link */}
+<div className="flex flex-col items-center lg:items-start mt-6 space-y-3">
+  <p className="text-sm text-gray-600 dark:text-gray-300">
+    Puoi scaricare il mio CV o visualizzare la certificazione qui sotto:
+  </p>
 
-            {/* Download CV */}
-            <a
-              href={linkCV}
-              download
-              className="hover:text-[rgb(208,255,113)] transition"
-            >
-              <GrDocumentPdf />
-            </a>
+  <div className="flex justify-center lg:justify-start space-x-6 text-neutral-400 text-2xl">
+    {/* Download CV */}
+    <a
+      href={linkCV}
+      download
+      className="hover:text-[rgb(208,255,113)] transition"
+    >
+      <GrDocumentPdf />
+    </a>
 
-            {/* Link alla certificazione ufficiale */}
-            <a
-              href="https://credsverse.com/credentials/5b86ad31-f998-4dc9-87aa-2040f4301632"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-indigo-500 transition"
-            >
-              <FaAward />
-            </a>
-          </div>
+    {/* Link alla certificazione ufficiale */}
+    <a
+      href="https://credsverse.com/credentials/5b86ad31-f998-4dc9-87aa-2040f4301632"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="hover:text-indigo-500 transition"
+    >
+      <FaAward />
+    </a>
+  </div>
+</div>
         </div>
 
         {/* Right Image Section (Certificato “fluttuante”) */}
@@ -115,7 +120,7 @@ export default function AboutMeSection() {
           <img
             src={certificato}
             alt="Certificato Boolean di Vincenzo Ferraro"
-            className="w-3/4 max-w-xs md:max-w-sm lg:max-w-md h-auto object-contain rounded-2xl shadow-2xl transition-transform duration-300 hover:scale-105"
+            className=" max-w-xs md:max-w-sm lg:max-w-md h-auto object-contain rounded-2xl shadow-2xl transition-transform duration-300 "
           />
         </div>
       </div>
