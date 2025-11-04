@@ -1,22 +1,24 @@
-import { FaLinkedin, FaGithub, FaCertificate } from 'react-icons/fa';
-import Memoji from "../assets/img/memoji-Trasparente.png";
-import Certificato from "../assets/img/certificatoBoolean.png";
+import { FaLinkedin, FaGithub, FaCertificate, FaDownload, FaAward } from "react-icons/fa";
+import memoji from "../assets/img/memoji-Trasparente.png";
+import certificato from "../assets/img/certificatoBoolean.png";
+import linkCV from "../assets/doc/CV_Vincenzo_Ferraro.pdf"
+
 
 export default function AboutMeSection() {
   return (
     <section
       id="about"
-      className="min-h-screen text-gray-800 dark:text-gray-200 flex flex-col items-center justify-center px-8 pt-18 gap-12"
+      className="min-h-screen text-gray-800 dark:text-white flex flex-col items-center justify-center px-8 pt-18 gap-12"
     >
       {/* Top Section: About + Memoji */}
       <div className="flex flex-col-reverse md:flex-row items-center justify-center w-full max-w-6xl gap-12">
         {/* Left Text Section */}
         <div className="max-w-lg text-center md:text-left">
-          <h2 className="text-6xl md:text-7xl font-extrabold mb-6 tracking-tight uppercase">
+          <h2 className="text-indigo-500 dark:text-[rgb(208,255,113)]  text-6xl md:text-7xl font-extrabold mb-6 tracking-tight uppercase">
             chi sono
           </h2>
 
-          <h1 className="text-2xl font-semibold mb-4 uppercase">
+          <h1 className="text-2xl font-semibold mb-4 uppercase dark:">
             vincenzo ferraro
           </h1>
 
@@ -33,7 +35,7 @@ export default function AboutMeSection() {
           </p>
 
           {/* Social Icons */}
-          <div className="flex justify-center md:justify-start space-x-5 text-neutral-400 text-2xl mt-8">
+          <div className="flex justify-center md:justify-start space-x-5 text-neutral-400 text-2xl mt-6">
             <a
               href="https://www.linkedin.com/in/vincenzo-ferraro-567a60380"
               target="_blank"
@@ -56,34 +58,65 @@ export default function AboutMeSection() {
         {/* Right Image Section (Memoji “fluttuante”) */}
         <div className="w-full md:w-auto flex justify-center bg-transparent relative">
           <img
-            src={Memoji}
+            src={memoji}
             alt="Memoji di Vincenzo Ferraro"
             className="w-full max-w-xs md:max-w-sm h-auto object-contain drop-shadow-2xl animate-float"
           />
         </div>
       </div>
 
-      {/* Certificate Section - spostata sotto */}
-      <div className="w-full flex flex-col items-center text-center mt-5">
-        <h3 className="text-2xl font-semibold mb-2 flex items-center gap-q justify-center">
-          <FaCertificate className="text-yellow-500 text-2xl" />
-          Certificato Web Development
-        </h3>
+      {/* Formazione + Certificato */}
+      <div className="flex flex-col lg:flex-row-reverse items-center justify-between w-full max-w-6xl mx-auto gap-10 px-4">
+        {/* Left Text Section */}
+        <div className="max-w-xl text-center lg:text-left">
+          <h3 className="text-indigo-500 dark:text-[rgb(208,255,113)] text-5xl md:text-6xl font-extrabold mb-6 tracking-tight uppercase">
+            formazione
+          </h3>
 
-        <a
-          href="https://credsverse.com/credentials/5b86ad31-f998-4dc9-87aa-2040f4301632"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-600 hover:underline mb-6"
-        >
-          Visualizza certificato su Credsverse
-        </a>
+          <p className="text-xl md:text-2xl font-semibold mb-4 uppercase">
+            Master Full Stack Developer
+          </p>
 
-        <img
-          src={Certificato}
-          alt="Certificato di Vincenzo Ferraro - Web Development"
-          className="w-full max-w-lg rounded-xl shadow-lg"
-        />
+          <p className="leading-relaxed mb-4">
+            Percorso di formazione full-time di 600 ore live durante le quali ho partecipato a lezioni teoriche e pratiche e ho appreso le basi della programmazione front-end, back-end e l'utilizzo di MySQL, così come i principali strumenti di sviluppo.
+          </p>
+
+          <p className="leading-relaxed">
+            Un’esperienza immersiva che mi ha permesso di sviluppare un metodo di lavoro strutturato e collaborativo, migliorare le mie competenze tecniche e acquisire maggiore sicurezza nello sviluppo di progetti web completi.
+          </p>
+
+          {/* Icons link */}
+          <div className="flex justify-center lg:justify-start space-x-6 text-neutral-400 text-2xl mt-6">
+
+            {/* Download CV */}
+            <a
+              href={linkCV}
+              download
+              className="hover:text-[rgb(208,255,113)] transition"
+            >
+              <FaDownload />
+            </a>
+
+            {/* Link alla certificazione ufficiale */}
+            <a
+              href="https://credsverse.com/credentials/5b86ad31-f998-4dc9-87aa-2040f4301632"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-indigo-500 transition"
+            >
+              <FaAward />
+            </a>
+          </div>
+        </div>
+
+        {/* Right Image Section (Certificato “fluttuante”) */}
+        <div className="w-full lg:w-1/2 flex justify-center">
+          <img
+            src={certificato}
+            alt="Certificato Boolean di Vincenzo Ferraro"
+            className="w-3/4 max-w-xs md:max-w-sm lg:max-w-md h-auto object-contain rounded-2xl shadow-2xl transition-transform duration-300 hover:scale-105"
+          />
+        </div>
       </div>
     </section>
   );

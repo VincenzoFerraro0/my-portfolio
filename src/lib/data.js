@@ -59,19 +59,5 @@ export const projects = [
     tech: ['React', 'TailwindCSS', 'EmailJS', 'Elfsight'],
     link: 'https://www.ferrarosrls.com',
     image: sitoFerraroPreview,
-  },
-  {
-    title: 'E-commerce UI',
-    description: 'Prototipo moderno di interfaccia e-commerce con focus su UX e animazioni.',
-    tech: ['Next.js', 'TypeScript', 'Stripe API'],
-    link: 'https://ecommerce-demo.it',
-    image: 'https://via.placeholder.com/600x400?text=E-commerce+UI',
-  },
-  {
-    title: 'AI Chatbot',
-    description: 'Assistente intelligente sviluppato con OpenAI API e Node.js.',
-    tech: ['Node.js', 'OpenAI API', 'Express'],
-    link: 'https://chatbot-demo.it',
-    image: 'https://via.placeholder.com/600x400?text=AI+Chatbot',
-  },
+  }
 ];
