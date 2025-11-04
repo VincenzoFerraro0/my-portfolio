@@ -74,7 +74,7 @@ export const projects = [
     description:
       'Boolflix è una web app che replica le funzionalità base di Netflix, realizzata con React. Permette di esplorare un vasto catalogo di film e serie TV, con ricerca dinamica, dettagli e interfaccia responsive. Utilizza le API di TMDB per i dati.',
     tech: ['React', 'JavaScript','TMDB API','Bootstrap'],
-    link: 'https://boolflix-demo.vercel.app/', // modifica con il link corretto
+    link: 'https://react-boolflix-wheat.vercel.app/', // modifica con il link corretto
     image: boolflixPreview,
   },
 ];
