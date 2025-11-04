@@ -18,7 +18,7 @@ const item = {
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="min-h-screen px-6 lg:px-16 flex flex-col items-center justify-center bg-gradient-to-b from-transparent via-white/40 to-transparent dark:via-[#111]/60 pt-20">
+    <section id="projects" className="min-h-screen px-6 lg:px-16 flex flex-col items-center justify-center bg-gradient-to-b from-transparent via-white/40 to-transparent dark:via-[#111]/60 pt-18">
       
       {/* Titolo */}
       <motion.h2

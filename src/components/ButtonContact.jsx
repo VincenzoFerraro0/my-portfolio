@@ -1,7 +1,7 @@
 import { Pointer } from "lucide-react";
 import { Link } from "react-scroll";
 
-export default function ButtonContact({ staticGradient = false }) {
+export default function ButtonContact({ staticGradient, onClick }) {
   return (
     <Link
       to="contact"        // <-- ID della sezione contatti
@@ -9,6 +9,7 @@ export default function ButtonContact({ staticGradient = false }) {
       duration={600}      // durata dell’animazione
       offset={-100}       // per compensare la navbar fissa
       spy={true}
+      onClick={onClick} // <-- importante!
 
     >
       <button

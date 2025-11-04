@@ -150,7 +150,7 @@ export default function Navbar() {
                 </div>
 
                 <motion.div className="flex justify-center">
-                  <ButtonContact staticGradient />
+                  <ButtonContact staticGradient onClick={() => setIsOpen(false)} />
                 </motion.div>
               </motion.div>
             </motion.div>
