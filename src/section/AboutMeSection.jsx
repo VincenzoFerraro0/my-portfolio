@@ -1,24 +1,25 @@
-import { FaLinkedin, FaGithub, FaCertificate, FaDownload, FaAward } from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaAward } from "react-icons/fa";
 import memoji from "../assets/img/memoji-Trasparente.png";
 import certificato from "../assets/img/certificatoBoolean.png";
 import linkCV from "../assets/doc/CV_Vincenzo_Ferraro.pdf"
+import { GrDocumentPdf } from "react-icons/gr";
 
 
 export default function AboutMeSection() {
   return (
     <section
       id="about"
-      className="min-h-screen text-gray-800 dark:text-white flex flex-col items-center justify-center px-8 pt-18 gap-12"
+      className="min-h-screen flex flex-col items-center justify-center text-gray-800 dark:text-white px-8 pt-20 "
     >
       {/* Top Section: About + Memoji */}
-      <div className="flex flex-col-reverse md:flex-row items-center justify-center w-full max-w-6xl gap-12">
+      <div className="flex flex-col-reverse md:flex-row items-center justify-center w-full  gap-12">
         {/* Left Text Section */}
         <div className="max-w-lg text-center md:text-left">
           <h2 className="text-indigo-500 dark:text-[rgb(208,255,113)]  text-6xl md:text-7xl font-extrabold mb-6 tracking-tight uppercase">
             chi sono
           </h2>
 
-          <h1 className="text-2xl font-semibold mb-4 uppercase dark:">
+          <h1 className="text-2xl font-semibold mb-4 uppercase ">
             vincenzo ferraro
           </h1>
 
@@ -94,7 +95,7 @@ export default function AboutMeSection() {
               download
               className="hover:text-[rgb(208,255,113)] transition"
             >
-              <FaDownload />
+              <GrDocumentPdf />
             </a>
 
             {/* Link alla certificazione ufficiale */}

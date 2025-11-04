@@ -30,7 +30,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="min-h-screen flex flex-col items-center justify-center text-gray-800 dark:text-white px-8 pt-20 pb-20"
+      className="min-h-screen flex flex-col items-center justify-center text-gray-800 dark:text-white px-8 pb-20"
     >
       <div className="w-full max-w-6xl flex flex-col lg:flex-row items-center justify-between gap-12">
         {/* === TEXT AREA === */}
