@@ -24,7 +24,7 @@ export default function AboutMeSection() {
           </h1>
 
           <p className="leading-relaxed mb-4">
-            Ciao! Sono Vincenzo, un appassionato di programmazione nato dalla curiosità di capire come funziona il web.
+            Ciao! Sono Vincenzo, un appassionato di programmazione con la curiosità di capire come funziona il web.
           </p>
 
           <p className="leading-relaxed mb-4">
