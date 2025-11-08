@@ -1,7 +1,7 @@
 import { FaLinkedin, FaGithub, FaAward } from "react-icons/fa";
 import memoji from "../assets/img/memoji-Trasparente.png";
 import certificato from "../assets/img/certificatoBoolean.png";
-import linkCV from "../assets/doc/CV_Vincenzo_Ferraro.pdf"
+import linkCV from "../assets/doc/cv-vincenzo-ferraro.pdf"
 import { GrDocumentPdf } from "react-icons/gr";
 
 
