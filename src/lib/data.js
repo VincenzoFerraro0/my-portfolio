@@ -8,6 +8,8 @@ import typescriptIcon from '../assets/icons/typescript.svg';
 import reactIcon from '../assets/icons/react.svg';
 import bootstrapIcon from '../assets/icons/bootstrap.svg';
 import tailwindIcon from '../assets/icons/tailwindcss.svg';
+import motionIcon from '../assets/icons/motion.svg';
+
 
 // TOOLS ICON
 import trello from '../assets/icons/trello.svg';
@@ -34,6 +36,7 @@ export const frontendSkills = [
   { name: 'React', iconLight: reactIcon, iconDark: reactIcon },
   { name: 'Bootstrap', iconLight: bootstrapIcon, iconDark: bootstrapIcon },
   { name: 'Tailwind CSS', iconLight: tailwindIcon, iconDark: tailwindIcon },
+  { name: 'Motion', iconLight: motionIcon, iconDark: motionIcon },
 ];
 
 // BACKEND ICONS
