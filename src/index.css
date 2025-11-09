@@ -7,6 +7,12 @@
 /* Background per modalità light (default) */
 body {
   background-color: #f7f7f7;
+  font-family: 'font';
+  src: url('/fonts/font.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+
 }
 
 /* Background per modalità dark */
@@ -21,7 +27,7 @@ body {
   z-index: 0;
 }
 
-  /* testi leggibili */
+/* testi leggibili */
 .dark body::before {
   content: "";
   position: absolute;

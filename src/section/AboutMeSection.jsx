@@ -88,7 +88,7 @@ export default function AboutMeSection() {
 
 {/* Icons link */}
 <div className="flex flex-col items-center lg:items-start mt-6 space-y-3">
-  <p className="text-sm text-gray-600 dark:text-gray-300">
+  <p className="text-sm ">
     Puoi scaricare il mio CV o visualizzare la certificazione qui sotto:
   </p>
 
