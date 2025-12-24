@@ -1,6 +1,6 @@
-import sitoFerraroPreview from '../assets/projects/sito-ferraro-preview.png';
-import webTobolaPreview from '../assets/projects/web-tombola-preview.png';
-import boolflixPreview from '../assets/projects/boolflix-preview.png'; // aggiungi l’immagine del progetto
+import sitoFerraroPreview from '../assets/projects/sito-ferraro-preview.webp';
+import webTobolaPreview from '../assets/projects/web-tombola-preview.webp';
+import boolflixPreview from '../assets/projects/boolflix-preview.webp'; // aggiungi l’immagine del progetto
 
 // FRONTEND ICONS
 import javascriptIcon from '../assets/icons/javascript.svg';

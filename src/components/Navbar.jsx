@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-scroll'; 
-import fotoProfilo from '../assets/img/foto-profilo.png';
+import fotoProfilo from '../assets/img/foto-profilo.webp';
 import ButtonContact from '../components/ButtonContact';
 import { Menu, X } from 'lucide-react';
 import OnlineStatusIndicator from './OnlineStatusIndicator';
