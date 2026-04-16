@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-scroll'; 
+import { Link } from 'react-scroll';
 import fotoProfilo from '../assets/img/foto-profilo.webp';
 import ButtonContact from '../components/ButtonContact';
 import { Menu, X } from 'lucide-react';
@@ -41,13 +41,15 @@ export default function Navbar() {
                       justify-between w-[70%] lg:max-w-[500px] max-w-[350px] px-3 py-2 
                       rounded-4xl border border-gray-200 bg-white/80 z-50 
                       dark:bg-[rgba(15,15,15,0.9)]">
-        
+
         <img
           src={fotoProfilo}
           alt="Portfolio Avatar"
+          width="40"
+          height="40"
           className="object-cover rounded-full lg:w-10 lg:h-10 h-9 w-9"
+          loading="lazy"
         />
-
         <OnlineStatusIndicator />
 
         {/* Links Desktop */}
@@ -83,8 +85,11 @@ export default function Navbar() {
         </div>
 
         <div className="lg:hidden text-white bg-indigo-500 dark:bg-[rgb(208,255,113)] dark:text-black rounded-full">
-          <button onClick={() => setIsOpen(true)} className="flex items-center p-2 align-items-center">
-            <MenuIcon className="w-4 h-4" />
+          <button
+            aria-label="Apri il menu di navigazione"
+            onClick={() => setIsOpen(true)} className="flex items-center p-2 align-items-center cursor-pointer"
+           >
+          <MenuIcon className="w-4 h-4" />
           </button>
         </div>
       </nav>
@@ -123,11 +128,15 @@ export default function Navbar() {
                   <img
                     src={fotoProfilo}
                     alt="Portfolio Avatar"
+                    width="40"
+                    height="40"
                     className="object-cover rounded-full lg:w-10 lg:h-10 h-9 w-9"
+                    loading="lazy"
                   />
                   <button
                     onClick={() => setIsOpen(false)}
-                    className="text-white dark:text-black bg-indigo-500 dark:bg-[rgb(208,255,113)] rounded-full p-2 flex items-center justify-center transition-transform active:scale-90"
+                    className="text-white dark:text-black bg-indigo-500 dark:bg-[rgb(208,255,113)] rounded-full p-2 flex items-center justify-center transition-transform active:scale-90 cursor-pointer"
+                    aria-label= "Chiudi il menu di navigazione"
                   >
                     <XIcon />
                   </button>

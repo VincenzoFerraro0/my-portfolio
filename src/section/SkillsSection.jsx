@@ -82,7 +82,11 @@ function SkillCategory({ title, skills, columns, isDarkMode }) {
             <img
               src={isDarkMode ? skill.iconDark : skill.iconLight}
               alt={skill.name}
-              className="w-16 h-16 mb-3 transition-all duration-300"
+              width="64"
+              height="64"
+              className="w-16 h-16 mb-3 transition-transform duration-300"
+              loading="lazy"
+              decoding="async"
             />
             <span className="text-gray-900 dark:text-gray-100 font-medium">{skill.name}</span>
           </motion.div>

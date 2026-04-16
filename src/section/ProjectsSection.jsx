@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
-import {projects} from '../lib/data';
+import { projects } from '../lib/data';
 
 
 const container = {
@@ -19,7 +19,7 @@ const item = {
 export default function ProjectsSection() {
   return (
     <section id="projects" className="min-h-screen px-6 lg:px-16 flex flex-col items-center justify-center bg-gradient-to-b from-transparent via-white/40 to-transparent dark:via-[#111]/60 lg:mt-18 mt-10">
-      
+
       {/* Titolo */}
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
@@ -47,14 +47,16 @@ export default function ProjectsSection() {
             transition={{ type: 'spring', stiffness: 200 }}
             className="backdrop-blur-lg border border-gray-200 dark:border-gray-700 rounded-3xl bg-white/60 dark:bg-[rgba(15,15,15,0.8)] shadow-lg overflow-hidden flex flex-col"
           >
-            <div className="relative w-full h-48 overflow-hidden rounded-t-3xl">
+            <div className="relative w-full aspect-[16/9] overflow-hidden rounded-2xl">
               <img
                 src={project.image}
                 alt={project.title}
-                className="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                loading="lazy"
+                decoding="async"
               />
             </div>
-
+            
             <div className="p-5 flex flex-col flex-grow justify-between">
               <div>
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">

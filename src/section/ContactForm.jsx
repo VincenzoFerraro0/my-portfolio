@@ -115,6 +115,7 @@ export default function ContactSection() {
                          dark:from-[rgb(208,255,113)] dark:to-[rgb(123,207,67)] 
                          text-white dark:text-black font-semibold py-3 px-6 rounded-full 
                          hover:scale-105 transition-transform duration-300"
+              aria-label="Invia il messaggio dal modulo di contatto"
             >
               <FaPaperPlane />
               Invia Messaggio

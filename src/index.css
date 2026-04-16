@@ -15,6 +15,18 @@ body {
 
 }
 
+/* Video background solo in dark mode */
+.dark .dark-bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -2;
+  pointer-events: none;
+}
+
 /* Background per modalità dark */
 .dark body {
   background: url("/background.gif") repeat center top;

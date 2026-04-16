@@ -13,6 +13,7 @@ export default function ButtonContact({ staticGradient, onClick }) {
 
     >
       <button
+        aria-label="Pulsante per scorrere alla sezione contatti"
         className={`
           group relative overflow-hidden rounded-full px-6 py-2 font-medium text-white 
           transition-transform duration-300 active:scale-95 cursor-pointer

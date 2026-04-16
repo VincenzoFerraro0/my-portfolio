@@ -3,6 +3,7 @@ import memoji from "../assets/img/memoji-Trasparente.webp";
 import certificato from "../assets/img/certificatoBoolean.webp";
 import linkCV from "../assets/doc/cv-vincenzo-ferraro.pdf"
 import { GrDocumentPdf } from "react-icons/gr";
+import { Link } from "react-scroll";
 
 
 export default function AboutMeSection() {
@@ -37,22 +38,24 @@ export default function AboutMeSection() {
 
           {/* Social Icons */}
           <div className="flex justify-center md:justify-start space-x-5 text-neutral-400 text-2xl mt-6 mb-6">
-            <a
+            <Link
               href="https://www.linkedin.com/in/vincenzo-ferraro-567a60380"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-blue-700 transition"
+              aria-label="Link per la piattaforma linkedin"
             >
               <FaLinkedin />
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://github.com/VincenzoFerraro0"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-black transition"
+              aria-label="Link per la piattaforma github"
             >
               <FaGithub />
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -61,7 +64,11 @@ export default function AboutMeSection() {
           <img
             src={memoji}
             alt="Memoji di Vincenzo Ferraro"
-            className="w-full max-w-xs md:max-w-sm h-auto object-contain drop-shadow-2xl animate-float"
+            width="320"
+            height="480"
+            className="w-full max-w-xs md:max-w-sm object-contain drop-shadow-2xl animate-float"
+            fetchpriority="high"
+            decoding="async"
           />
         </div>
       </div>
@@ -86,33 +93,36 @@ export default function AboutMeSection() {
             Un’esperienza immersiva che mi ha permesso di sviluppare un metodo di lavoro strutturato e collaborativo, migliorare le mie competenze tecniche e acquisire maggiore sicurezza nello sviluppo di progetti web completi.
           </p>
 
-{/* Icons link */}
-<div className="flex flex-col items-center lg:items-start mt-6 space-y-3">
-  <p className="text-sm ">
-    Puoi scaricare il mio CV o visualizzare la certificazione qui sotto:
-  </p>
+          {/* Icons link */}
+          <div className="flex flex-col items-center lg:items-start mt-6 space-y-3">
+            <p className="text-sm ">
+              Puoi scaricare il mio CV o visualizzare la certificazione qui sotto:
+            </p>
 
-  <div className="flex justify-center lg:justify-start space-x-6 text-neutral-400 text-2xl">
-    {/* Download CV */}
-    <a
-      href={linkCV}
-      download
-      className="hover:text-[rgb(208,255,113)] transition"
-    >
-      <GrDocumentPdf />
-    </a>
+            <div className="flex justify-center lg:justify-start space-x-6 text-neutral-400 text-2xl">
+              {/* Download CV */}
+              <Link
+                href={linkCV}
+                download
+                className="hover:text-[rgb(208,255,113)] transition"
+                aria-label="Link per il download del curriculm "
 
-    {/* Link alla certificazione ufficiale */}
-    <a
-      href="https://credsverse.com/credentials/5b86ad31-f998-4dc9-87aa-2040f4301632"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="hover:text-indigo-500 transition"
-    >
-      <FaAward />
-    </a>
-  </div>
-</div>
+              >
+                <GrDocumentPdf />
+              </Link>
+
+              {/* Link alla certificazione ufficiale */}
+              <Link
+                href="https://credsverse.com/credentials/5b86ad31-f998-4dc9-87aa-2040f4301632"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-indigo-500 transition"
+                aria-label="Link della certificazione"
+              >
+                <FaAward />
+              </Link>
+            </div>
+          </div>
         </div>
 
         {/* Right Image Section (Certificato “fluttuante”) */}
@@ -120,7 +130,11 @@ export default function AboutMeSection() {
           <img
             src={certificato}
             alt="Certificato Boolean di Vincenzo Ferraro"
-            className=" max-w-xs md:max-w-sm lg:max-w-md h-auto object-contain rounded-2xl shadow-2xl transition-transform duration-300 "
+            width="320"
+            height="443"
+            className="max-w-xs md:max-w-sm lg:max-w-md h-auto object-contain rounded-2xl shadow-2xl transition-transform duration-300"
+            loading="lazy"
+            decoding="async"
           />
         </div>
       </div>
