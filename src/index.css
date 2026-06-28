@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Colore accent del pannello robot 3D (palette Opia) */
+@theme {
+  --color-acid: #AAFF00;
+}
+
 
 
 

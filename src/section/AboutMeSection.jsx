@@ -1,5 +1,5 @@
 import { FaLinkedin, FaGithub, FaAward } from "react-icons/fa";
-import memoji from "../assets/img/memoji-Trasparente.webp";
+import HeroSceneLoader from "../components/robot/HeroSceneLoader";
 import certificato from "../assets/img/certificatoBoolean.webp";
 import linkCV from "../assets/doc/cv-vincenzo-ferraro.pdf"
 import { GrDocumentPdf } from "react-icons/gr";
@@ -59,17 +59,11 @@ export default function AboutMeSection() {
           </div>
         </div>
 
-        {/* Right Image Section (Memoji “fluttuante”) */}
-        <div className="w-full md:w-auto flex justify-center bg-transparent relative">
-          <img
-            src={memoji}
-            alt="Memoji di Vincenzo Ferraro"
-            width="320"
-            height="480"
-            className="w-full max-w-xs md:max-w-sm object-contain drop-shadow-2xl animate-float"
-            fetchpriority="high"
-            decoding="async"
-          />
+        {/* Right Section: Robot 3D animato (R3F) — sostituisce la memoji statica.
+            Il contenitore deve essere relative e avere un'altezza definita:
+            Canvas e pannello di controllo sono posizionati in absolute. */}
+        <div className="relative w-full max-w-sm md:max-w-none md:flex-1 h-[440px] md:h-[500px] bg-transparent">
+          <HeroSceneLoader />
         </div>
       </div>
 
