@@ -28,7 +28,7 @@ export default function OnlineStatusIndicator() {
             >
                 {/* Effetto 'ping' */}
                 <span className="absolute inline-flex h-full w-full rounded-full 
-                         bg-[rgb(208,255,113)] opacity-75 animate-ping"></span>
+                         bg-[rgb(175,252,1)] opacity-75 animate-ping"></span>
             </motion.span>
         </div>
     )

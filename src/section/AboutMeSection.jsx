@@ -16,7 +16,7 @@ export default function AboutMeSection() {
       <div className="flex flex-col-reverse md:flex-row items-center justify-center w-full  max-w-6xl  gap-12">
         {/* Left Text Section */}
         <div className="max-w-lg text-center md:text-left">
-          <h2 className="text-indigo-500 dark:text-[rgb(208,255,113)]  text-6xl md:text-7xl font-extrabold mb-6 tracking-tight uppercase">
+          <h2 className="text-indigo-500 dark:text-[rgb(175,252,1)]  text-6xl md:text-7xl font-extrabold mb-6 tracking-tight uppercase">
             chi sono
           </h2>
 
@@ -71,7 +71,7 @@ export default function AboutMeSection() {
       <div className="flex flex-col lg:flex-row-reverse items-center justify-between w-full max-w-6xl mx-auto gap-10 mt-5 px-4">
         {/* Left Text Section */}
         <div className="max-w-xl text-center lg:text-left">
-          <h3 className="text-indigo-500 dark:text-[rgb(208,255,113)] text-5xl md:text-6xl font-extrabold mb-6 tracking-tight uppercase">
+          <h3 className="text-indigo-500 dark:text-[rgb(175,252,1)] text-5xl md:text-6xl font-extrabold mb-6 tracking-tight uppercase">
             formazione
           </h3>
 
@@ -98,7 +98,7 @@ export default function AboutMeSection() {
               <Link
                 href={linkCV}
                 download
-                className="hover:text-[rgb(208,255,113)] transition"
+                className="hover:text-[rgb(175,252,1)] transition"
                 aria-label="Link per il download del curriculm "
 
               >

@@ -54,7 +54,7 @@ export default function ToggleSwitch() {
                 >
                     <div
                         onClick={toggleDarkMode}
-                        className={`flex h-5 w-11 cursor-pointer items-center rounded-full px-1 transition-colors duration-300 ${isOn ? "bg-[rgb(208,255,113)]" : "bg-indigo-500"
+                        className={`flex h-5 w-11 cursor-pointer items-center rounded-full px-1 transition-colors duration-300 ${isOn ? "bg-[rgb(175,252,1)]" : "bg-indigo-500"
                             }`}
                     >
                         <motion.div

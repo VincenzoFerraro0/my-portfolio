@@ -45,7 +45,7 @@ export default function SkillsSection() {
         viewport={{ once: true }}
         className="text-4xl font-semibold text-gray-800 dark:text-gray-100 mb-12 text-center"
       >
-        Le mie <span className="text-indigo-500 dark:text-[rgb(208,255,113)]">Skills</span>
+        Le mie <span className="text-indigo-500 dark:text-[rgb(175,252,1)]">Skills</span>
       </motion.h2>
 
       {/* Frontend */}

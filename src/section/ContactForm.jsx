@@ -35,7 +35,7 @@ export default function ContactSection() {
       <div className="w-full max-w-6xl flex flex-col lg:flex-row items-center justify-between gap-12">
         {/* === TEXT AREA === */}
         <div className="flex-1 max-w-xl text-center lg:text-left">
-          <h2 className="text-indigo-500 dark:text-[rgb(208,255,113)] text-4xl md:text-7xl font-extrabold mb-6 tracking-tight uppercase">
+          <h2 className="text-indigo-500 dark:text-[rgb(175,252,1)] text-4xl md:text-7xl font-extrabold mb-6 tracking-tight uppercase">
             restiamo in contatto
           </h2>
 
@@ -82,7 +82,7 @@ export default function ContactSection() {
                 type="text"
                 name="user_name"
                 required
-                className="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent focus:ring-2 focus:ring-indigo-500 dark:focus:ring-[rgb(208,255,113)] outline-none"
+                className="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent focus:ring-2 focus:ring-indigo-500 dark:focus:ring-[rgb(175,252,1)] outline-none"
                 placeholder="Il tuo nome"
               />
             </div>
@@ -93,7 +93,7 @@ export default function ContactSection() {
                 type="email"
                 name="user_email"
                 required
-                className="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent focus:ring-2 focus:ring-indigo-500 dark:focus:ring-[rgb(208,255,113)] outline-none"
+                className="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent focus:ring-2 focus:ring-indigo-500 dark:focus:ring-[rgb(175,252,1)] outline-none"
                 placeholder="La tua email"
               />
             </div>
@@ -104,7 +104,7 @@ export default function ContactSection() {
                 name="message"
                 rows="5"
                 required
-                className="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent focus:ring-2 focus:ring-indigo-500 dark:focus:ring-[rgb(208,255,113)] outline-none resize-none"
+                className="w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-700 bg-transparent focus:ring-2 focus:ring-indigo-500 dark:focus:ring-[rgb(175,252,1)] outline-none resize-none"
                 placeholder="Scrivi qui il tuo messaggio..."
               ></textarea>
             </div>
@@ -112,7 +112,7 @@ export default function ContactSection() {
             <button
               type="submit"
               className="flex items-center justify-center gap-2 bg-linear-to-r from-[rgb(94,103,230)] to-[rgb(142,94,230)]
-                         dark:from-[rgb(208,255,113)] dark:to-[rgb(123,207,67)] 
+                         dark:from-[rgb(175,252,1)] dark:to-[rgb(123,207,67)] 
                          text-white dark:text-black font-semibold py-3 px-6 rounded-full 
                          hover:scale-105 transition-transform duration-300"
               aria-label="Invia il messaggio dal modulo di contatto"

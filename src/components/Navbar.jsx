@@ -72,7 +72,7 @@ export default function Navbar() {
                 {link.name}
               </Link>
               <motion.span
-                className="absolute left-0 bottom-0 h-[2px] w-full bg-indigo-500 dark:bg-[rgb(208,255,113)] origin-left scale-x-0"
+                className="absolute left-0 bottom-0 h-[2px] w-full bg-indigo-500 dark:bg-[rgb(175,252,1)] origin-left scale-x-0"
                 whileHover={{ scaleX: 1 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
               />
@@ -84,7 +84,7 @@ export default function Navbar() {
           <ButtonContact />
         </div>
 
-        <div className="lg:hidden text-white bg-indigo-500 dark:bg-[rgb(208,255,113)] dark:text-black rounded-full">
+        <div className="lg:hidden text-white bg-indigo-500 dark:bg-[rgb(175,252,1)] dark:text-black rounded-full">
           <button
             aria-label="Apri il menu di navigazione"
             onClick={() => setIsOpen(true)} className="flex items-center p-2 align-items-center cursor-pointer"
@@ -135,7 +135,7 @@ export default function Navbar() {
                   />
                   <button
                     onClick={() => setIsOpen(false)}
-                    className="text-white dark:text-black bg-indigo-500 dark:bg-[rgb(208,255,113)] rounded-full p-2 flex items-center justify-center transition-transform active:scale-90 cursor-pointer"
+                    className="text-white dark:text-black bg-indigo-500 dark:bg-[rgb(175,252,1)] rounded-full p-2 flex items-center justify-center transition-transform active:scale-90 cursor-pointer"
                     aria-label= "Chiudi il menu di navigazione"
                   >
                     <XIcon />
@@ -151,7 +151,7 @@ export default function Navbar() {
                       duration={600}
                       offset={-100}
                       onClick={() => setIsOpen(false)}
-                      className="hover:text-[rgb(208,255,113)] transition cursor-pointer"
+                      className="hover:text-[rgb(175,252,1)] transition cursor-pointer"
                     >
                       {link.name}
                     </Link>

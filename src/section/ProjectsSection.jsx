@@ -28,7 +28,7 @@ export default function ProjectsSection() {
         viewport={{ once: true }}
         className="text-4xl font-semibold text-gray-800 dark:text-gray-100 mb-12 text-center"
       >
-        I miei <span className="text-indigo-500 dark:text-[rgb(208,255,113)]">Progetti</span>
+        I miei <span className="text-indigo-500 dark:text-[rgb(175,252,1)]">Progetti</span>
       </motion.h2>
 
       {/* Cards container */}
@@ -70,7 +70,7 @@ export default function ProjectsSection() {
                   {project.tech.map((t, i) => (
                     <span
                       key={i}
-                      className="text-xs px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 dark:bg-[rgb(208,255,113,0.15)] dark:text-[rgb(208,255,113)] border border-indigo-200 dark:border-[rgb(208,255,113,0.4)]"
+                      className="text-xs px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 dark:bg-[rgb(175,252,1,0.15)] dark:text-[rgb(175,252,1)] border border-indigo-200 dark:border-[rgb(175,252,1,0.4)]"
                     >
                       {t}
                     </span>
@@ -82,7 +82,7 @@ export default function ProjectsSection() {
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-auto inline-flex items-center justify-center text-indigo-600 dark:text-[rgb(208,255,113)] hover:underline text-sm font-medium"
+                className="mt-auto inline-flex items-center justify-center text-indigo-600 dark:text-[rgb(175,252,1)] hover:underline text-sm font-medium"
               >
                 Visita il progetto <ExternalLink className="ml-1 w-4 h-4" />
               </a>
