@@ -1,10 +1,30 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import * as THREE from 'three'
 import { EXPRESSIONS, useRobotControls } from './RobotControlsContext'
 
-const MODEL_URL = '/models/RobotExpressive_OPIA.glb'
+// Due varianti colore del robot: verde in dark mode, viola in light mode
+// (coerente con l'accent indigo del tema chiaro). Lo switch segue la classe
+// `dark` su <html>, gestita da ToggleSwitch.
+const MODEL_DARK = '/models/pkgrobot.glb'
+const MODEL_LIGHT = '/models/pkgrobot_viola.glb'
+
+// Osserva la classe `dark` su document.documentElement e ritorna lo stato.
+function useIsDark() {
+  const [isDark, setIsDark] = useState(
+    () => typeof document !== 'undefined' && document.documentElement.classList.contains('dark'),
+  )
+  useEffect(() => {
+    const el = document.documentElement
+    const update = () => setIsDark(el.classList.contains('dark'))
+    update()
+    const obs = new MutationObserver(update)
+    obs.observe(el, { attributes: true, attributeFilter: ['class'] })
+    return () => obs.disconnect()
+  }, [])
+  return isDark
+}
 
 // Le emote partono al click, vanno in fade-out e tornano allo state base.
 const ONE_SHOT_EMOTES = new Set(['Jump', 'Yes', 'No', 'Wave', 'Punch', 'ThumbsUp'])
@@ -15,7 +35,8 @@ const TERMINAL_STATES = new Set(['Death', 'Sitting', 'Standing'])
 
 export default function RobotModel() {
   const group = useRef(null)
-  const { scene, animations } = useGLTF(MODEL_URL)
+  const isDark = useIsDark()
+  const { scene, animations } = useGLTF(isDark ? MODEL_DARK : MODEL_LIGHT)
   const { actions } = useAnimations(animations, group)
 
   const { state, emoteSignal, expressions } = useRobotControls()
@@ -145,4 +166,5 @@ export default function RobotModel() {
   )
 }
 
-useGLTF.preload(MODEL_URL)
+useGLTF.preload(MODEL_DARK)
+useGLTF.preload(MODEL_LIGHT)
