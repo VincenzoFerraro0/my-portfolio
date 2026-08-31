@@ -17,6 +17,9 @@ export function RobotControlsProvider({ children }) {
   const [state, setState] = useState(pickInitialState)
   const [emoteSignal, setEmoteSignal] = useState({ name: null, nonce: 0 })
   const [expressions, setExpressions] = useState({ Angry: 0, Surprised: 0, Sad: 0 })
+  // Apertura del pannello: sta nel context perché anche il viewport 3D deve
+  // reagire (si restringe invece di finire coperto dal pannello).
+  const [panelOpen, setPanelOpen] = useState(false)
 
   const triggerEmote = useCallback((name) => {
     setEmoteSignal((prev) => ({ name, nonce: prev.nonce + 1 }))
@@ -43,8 +46,17 @@ export function RobotControlsProvider({ children }) {
   }, [triggerEmote])
 
   const value = useMemo(
-    () => ({ state, setState, triggerEmote, emoteSignal, expressions, setExpression }),
-    [state, triggerEmote, emoteSignal, expressions, setExpression],
+    () => ({
+      state,
+      setState,
+      triggerEmote,
+      emoteSignal,
+      expressions,
+      setExpression,
+      panelOpen,
+      setPanelOpen,
+    }),
+    [state, triggerEmote, emoteSignal, expressions, setExpression, panelOpen],
   )
 
   return <RobotControlsContext.Provider value={value}>{children}</RobotControlsContext.Provider>

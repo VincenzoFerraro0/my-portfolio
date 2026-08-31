@@ -4,11 +4,21 @@ import { useGLTF, useAnimations } from '@react-three/drei'
 import * as THREE from 'three'
 import { EXPRESSIONS, useRobotControls } from './RobotControlsContext'
 
-// Due varianti colore del robot: verde in dark mode, viola in light mode
-// (coerente con l'accent indigo del tema chiaro). Lo switch segue la classe
-// `dark` su <html>, gestita da ToggleSwitch.
-const MODEL_DARK = '/models/pkgrobot.glb'
-const MODEL_LIGHT = '/models/pkgrobot_viola.glb'
+// Un solo .glb per entrambi i temi. La vecchia variante `pkgrobot_viola.glb`
+// era esportata con un rig diverso (le clip animavano anche i nodi mesh, non
+// solo le ossa) e in light mode il robot si deformava. Qui carichiamo sempre
+// il modello buono e cambiamo a runtime solo il colore del materiale accent.
+const MODEL_URL = '/models/pkgrobot.glb'
+
+// Accent per tema: lime in dark (è il colore nativo del modello), indigo in
+// light — la stessa coppia usata nel resto del sito.
+const ACCENT_DARK = '#aaff00'
+const ACCENT_LIGHT = '#5e67e6'
+// Rapporto emissive/base del materiale originale: replicandolo, la variante
+// indigo conserva lo stesso "glow" di quella lime.
+const EMISSIVE_RATIO = 0.15
+// Nome del materiale colorato dentro il .glb (gli altri sono grigio e nero).
+const ACCENT_MATERIAL = 'Main'
 
 // Osserva la classe `dark` su document.documentElement e ritorna lo stato.
 function useIsDark() {
@@ -36,7 +46,7 @@ const TERMINAL_STATES = new Set(['Death', 'Sitting', 'Standing'])
 export default function RobotModel() {
   const group = useRef(null)
   const isDark = useIsDark()
-  const { scene, animations } = useGLTF(isDark ? MODEL_DARK : MODEL_LIGHT)
+  const { scene, animations } = useGLTF(MODEL_URL)
   const { actions } = useAnimations(animations, group)
 
   const { state, emoteSignal, expressions } = useRobotControls()
@@ -109,6 +119,22 @@ export default function RobotModel() {
     }
   }, [scene])
 
+  // Tint del materiale accent in base al tema. Il materiale è condiviso tra
+  // più mesh, quindi lo tocco una volta sola (dedup per uuid).
+  useEffect(() => {
+    const color = new THREE.Color(isDark ? ACCENT_DARK : ACCENT_LIGHT)
+    const seen = new Set()
+    scene.traverse((obj) => {
+      const mats = Array.isArray(obj.material) ? obj.material : obj.material ? [obj.material] : []
+      for (const mat of mats) {
+        if (mat.name !== ACCENT_MATERIAL || seen.has(mat.uuid)) continue
+        seen.add(mat.uuid)
+        mat.color.copy(color)
+        if (mat.emissive) mat.emissive.copy(color).multiplyScalar(EMISSIVE_RATIO)
+      }
+    })
+  }, [scene, isDark])
+
   // Helper: crossfade verso una clip qualsiasi.
   const fadeTo = (name, duration) => {
     if (!actions) return
@@ -166,5 +192,4 @@ export default function RobotModel() {
   )
 }
 
-useGLTF.preload(MODEL_DARK)
-useGLTF.preload(MODEL_LIGHT)
+useGLTF.preload(MODEL_URL)
