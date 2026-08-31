@@ -21,8 +21,9 @@ const EMISSIVE_RATIO = 0.15
 const ACCENT_MATERIAL = 'Main'
 
 // Frazione del frame occupata dal robot: il resto è aria ai bordi. Il margine
-// serve anche alle pose che escono dalla sagoma a riposo (Wave, Dance).
-const FILL = 0.85
+// non è solo estetico — la bbox è quella a riposo, mentre Jump, Wave e Dance
+// escono dalla sagoma, e devono restare dentro l'inquadratura.
+const FILL = 0.8
 
 // Osserva la classe `dark` su document.documentElement e ritorna lo stato.
 function useIsDark() {
