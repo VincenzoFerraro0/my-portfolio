@@ -18,22 +18,23 @@ function useIsMobile() {
   return isMobile
 }
 
-// Adatta la fov al rapporto d'aspetto: portrait → fov più ampia per non tagliare il robot.
-// Valori abbassati: il modello RobotExpressive è alto ~4u, quindi una fov stretta lo
-// faceva debordare dal frame (testa tagliata) — qui lasciamo aria sopra e sotto.
-function ResponsiveCamera() {
+// Fov fissa. Prima veniva variata a scaglioni sull'aspect ratio, ma il modello
+// aveva anche una scala fissa: due meccanismi di framing che si ostacolavano a
+// vicenda (col pannello aperto il robot diventava minuscolo). Ora l'unico
+// responsabile dell'inquadratura è RobotModel, che riscala il modello per
+// riempire il frame disponibile — vedi il fit lì.
+const FOV = 30
+
+// Il robot è centrato sull'origine (vedi RobotModel): punto la camera lì così
+// il framing è deterministico e non dipende dal default di R3F.
+function CameraLookAt() {
   const camera = useThree((state) => state.camera)
-  const size = useThree((state) => state.size)
 
   useEffect(() => {
     if (!(camera instanceof THREE.PerspectiveCamera)) return
-    const aspect = size.width / size.height
-    camera.fov = aspect < 1 ? 38 : aspect < 1.4 ? 32 : 28
-    // Il robot è centrato sull'origine (vedi RobotModel): punto la camera lì
-    // così il framing è deterministico e non dipende dal default di R3F.
     camera.lookAt(0, 0, 0)
     camera.updateProjectionMatrix()
-  }, [camera, size])
+  }, [camera])
 
   return null
 }
@@ -43,7 +44,7 @@ export default function HeroScene() {
 
   return (
     <Canvas
-      camera={{ position: [0, 1.8, 11], fov: 28 }}
+      camera={{ position: [0, 1.8, 11], fov: FOV }}
       style={{ width: '100%', height: '100%', background: 'transparent' }}
       // Antialias off su mobile: il MSAA WebGL è uno dei peggiori killer di FPS
       // su GPU integrate. La differenza visiva è quasi invisibile su display denso.
@@ -61,7 +62,7 @@ export default function HeroScene() {
       // Niente shadowMap (non lo usiamo) — risparmia un render pass.
       shadows={false}
     >
-      <ResponsiveCamera />
+      <CameraLookAt />
 
       {/* Lighting calibrato sul tema dark + acid (#AAFF00). Su mobile rimuovo
           il point light colorato: una luce in meno = meno costo per-fragment. */}
