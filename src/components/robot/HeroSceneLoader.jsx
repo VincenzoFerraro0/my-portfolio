@@ -7,15 +7,17 @@ import RobotControls from './RobotControls'
 // entrambi condividono lo stato.
 const HeroScene = lazy(() => import('./HeroScene'))
 
-// Larghezza/altezza riservate al pannello. Sono le stesse misure usate in
+// Altezza del box. Sul bottom sheet il box CRESCE dell'altezza del pannello
+// (h-56 = 14rem) invece di comprimere il canvas: il robot resta grande uguale e
+// il pannello si aggiunge sotto. Sul dock laterale l'altezza non cambia — lì si
+// restringe solo la larghezza, e il fit-to-frame di RobotModel se ne occupa.
+const BOX_CLOSED = 'h-[440px] @md:h-[500px]'
+const BOX_OPEN = 'h-[664px] @md:h-[500px]'
+
+// Spazio riservato al pannello dentro il box. Sono le stesse misure usate in
 // RobotControls: viewport e pannello si spartiscono il box senza sovrapporsi.
-// Container query (non media query): quello che conta è quanto è largo il box
-// del robot, non la viewport — così il layout regge anche se la sezione cambia.
 const VIEWPORT_OPEN = 'bottom-56 @md:bottom-0 @md:right-60'
 
-// Il viewport 3D si restringe quando il pannello è aperto: la camera di
-// HeroScene ricalcola la fov sul nuovo aspect ratio, quindi il robot resta
-// interamente visibile invece di finire sotto al pannello.
 function RobotViewport() {
   const { panelOpen } = useRobotControls()
 
@@ -30,15 +32,21 @@ function RobotViewport() {
   )
 }
 
+function HeroBox() {
+  const { panelOpen } = useRobotControls()
+
+  return (
+    <div className={`relative w-full transition-[height] duration-300 ease-out ${panelOpen ? BOX_OPEN : BOX_CLOSED}`}>
+      <RobotViewport />
+      <RobotControls />
+    </div>
+  )
+}
+
 export default function HeroSceneLoader() {
   return (
     <RobotControlsProvider>
-      {/* `@container` rende il box il riferimento delle container query usate
-          qui e nel pannello. */}
-      <div className="@container absolute inset-0">
-        <RobotViewport />
-        <RobotControls />
-      </div>
+      <HeroBox />
     </RobotControlsProvider>
   )
 }

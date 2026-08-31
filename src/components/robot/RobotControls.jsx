@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import {
   EMOTES,
   EXPRESSIONS,
@@ -43,6 +43,13 @@ export default function RobotControls() {
     useRobotControls()
   const [tab, setTab] = useState(TABS[0].id)
 
+  // Sul bottom sheet il pannello si apre sotto al robot e può cadere fuori
+  // schermo: al mount lo porto in vista. `nearest` è no-op se è già visibile,
+  // quindi sul dock laterale non fa nulla.
+  const revealOnMount = useCallback((el) => {
+    el?.scrollIntoView({ block: 'nearest' })
+  }, [])
+
   return (
     <>
       {/* Toggle: visibile solo a pannello chiuso — da aperto la chiusura sta
@@ -64,6 +71,7 @@ export default function RobotControls() {
       {panelOpen && (
         <div
           id="robot-controls-panel"
+          ref={revealOnMount}
           role="dialog"
           aria-label="Pannello controlli robot"
           className={`absolute z-30 flex flex-col border-t @md:border-t-0 @md:border-b @md:border-l font-mono text-[11px] select-none shadow-2xl ${PANEL_BOX} ${SURFACE}`}

@@ -60,9 +60,11 @@ export default function AboutMeSection() {
         </div>
 
         {/* Right Section: Robot 3D animato (R3F) — sostituisce la memoji statica.
-            Il contenitore deve essere relative e avere un'altezza definita:
-            Canvas e pannello di controllo sono posizionati in absolute. */}
-        <div className="relative w-full max-w-sm md:max-w-none md:flex-1 h-[440px] md:h-[500px] bg-transparent">
+            Qui si definisce solo la larghezza: l'altezza la decide
+            HeroSceneLoader, perché cambia quando il pannello è aperto.
+            `@container` rende questo box il riferimento delle container query
+            usate dalla scena e dal pannello. */}
+        <div className="@container w-full max-w-sm md:max-w-none md:flex-1 bg-transparent">
           <HeroSceneLoader />
         </div>
       </div>
