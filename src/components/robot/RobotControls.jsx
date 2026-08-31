@@ -13,7 +13,10 @@ import {
 // liberato — bottom sheet su box stretti, colonna a destra su box larghi.
 // Le misure qui sotto devono restare allineate a VIEWPORT_OPEN.
 const PANEL_BOX =
-  'inset-x-0 bottom-0 h-56 @md:inset-x-auto @md:right-0 @md:top-0 @md:bottom-0 @md:h-auto @md:w-60'
+  'inset-x-0 bottom-0 h-56' +
+  // Su box largo il pannello è una card in alto a destra dimensionata sul
+  // contenuto (con le tab, una colonna a tutta altezza resterebbe mezza vuota).
+  ' @md:inset-x-auto @md:right-0 @md:top-0 @md:bottom-auto @md:h-auto @md:max-h-full @md:w-60'
 
 // Sfondo/bordo/testo condivisi da pannello e toggle, con varianti per tema.
 const SURFACE =
@@ -63,7 +66,7 @@ export default function RobotControls() {
           id="robot-controls-panel"
           role="dialog"
           aria-label="Pannello controlli robot"
-          className={`absolute z-30 flex flex-col border-t @md:border-t-0 @md:border-l font-mono text-[11px] select-none shadow-2xl ${PANEL_BOX} ${SURFACE}`}
+          className={`absolute z-30 flex flex-col border-t @md:border-t-0 @md:border-b @md:border-l font-mono text-[11px] select-none shadow-2xl ${PANEL_BOX} ${SURFACE}`}
         >
           {/* Barra tab + chiusura: una riga sola, così anche sul bottom sheet
               resta il massimo spazio per i controlli veri. */}
