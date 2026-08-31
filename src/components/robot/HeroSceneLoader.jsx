@@ -11,7 +11,7 @@ const HeroScene = lazy(() => import('./HeroScene'))
 // RobotControls: viewport e pannello si spartiscono il box senza sovrapporsi.
 // Container query (non media query): quello che conta è quanto è largo il box
 // del robot, non la viewport — così il layout regge anche se la sezione cambia.
-const VIEWPORT_OPEN = 'bottom-48 @md:bottom-0 @md:right-60'
+const VIEWPORT_OPEN = 'bottom-56 @md:bottom-0 @md:right-60'
 
 // Il viewport 3D si restringe quando il pannello è aperto: la camera di
 // HeroScene ricalcola la fov sul nuovo aspect ratio, quindi il robot resta
