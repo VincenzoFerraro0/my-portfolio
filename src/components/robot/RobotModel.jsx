@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useThree } from '@react-three/fiber'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import * as THREE from 'three'
 import { EXPRESSIONS, useRobotControls } from './RobotControlsContext'
@@ -19,6 +19,10 @@ const ACCENT_LIGHT = '#5e67e6'
 const EMISSIVE_RATIO = 0.15
 // Nome del materiale colorato dentro il .glb (gli altri sono grigio e nero).
 const ACCENT_MATERIAL = 'Main'
+
+// Frazione del frame occupata dal robot: il resto è aria ai bordi. Il margine
+// serve anche alle pose che escono dalla sagoma a riposo (Wave, Dance).
+const FILL = 0.85
 
 // Osserva la classe `dark` su document.documentElement e ritorna lo stato.
 function useIsDark() {
@@ -51,24 +55,38 @@ export default function RobotModel() {
 
   const { state, emoteSignal, expressions } = useRobotControls()
 
-  // Framing deterministico: misuro la bounding box reale del modello, lo riscalo
-  // a un'altezza target (TARGET_H unità di mondo) e lo centro sull'ORIGINE del
-  // mondo. La camera guarda (0,0,0) (vedi ResponsiveCamera in HeroScene), quindi
-  // centrando la bbox sull'origine il robot è centrato nel frame e la testa non
-  // viene mai tagliata, qualunque sia la viewport.
-  //
-  // Frame visibile (peggior caso fov 28 @ distanza 11): ~5.48u in altezza →
-  // TARGET_H 4.4 lascia margine sopra/sotto su tutti i breakpoint.
-  const { scale, position } = useMemo(() => {
-    const TARGET_H = 4.4
+  const camera = useThree((state) => state.camera)
+  const viewport = useThree((state) => state.size)
+
+  // Bounding box reale del modello a riposo: costa una traversata, quindi la
+  // calcolo una volta sola e non a ogni resize del canvas.
+  const modelBox = useMemo(() => {
     const box = new THREE.Box3().setFromObject(scene)
-    const size = box.getSize(new THREE.Vector3())
-    const center = box.getCenter(new THREE.Vector3())
-    const s = size.y > 0 ? TARGET_H / size.y : 1
-    // Compenso il centro della bbox così, dopo la scala, finisce sull'origine.
-    // La rotazione attorno a Y non altera la quota; x/z del centro sono ~0.
-    return { scale: s, position: [-s * center.x, -s * center.y, -s * center.z] }
+    return { size: box.getSize(new THREE.Vector3()), center: box.getCenter(new THREE.Vector3()) }
   }, [scene])
+
+  // Fit-to-frame: invece di una scala fissa, calcolo quanto è grande il frame
+  // alla distanza del robot e lo riscalo per riempirlo. Così quando il canvas
+  // si restringe (pannello aperto) il robot resta grande quanto lo spazio
+  // concede, invece di rimpicciolirsi due volte.
+  //
+  // Lo centro sull'ORIGINE, dove punta la camera (vedi CameraLookAt): il robot
+  // è sempre centrato nel frame e la testa non viene mai tagliata.
+  const { scale, position } = useMemo(() => {
+    const { size, center } = modelBox
+    if (size.x <= 0 || size.y <= 0) return { scale: 1, position: [0, 0, 0] }
+
+    // Estensione del frame sul piano che passa per l'origine.
+    const distance = camera.position.length()
+    const frameH = 2 * distance * Math.tan((camera.fov * Math.PI) / 360)
+    const frameW = frameH * (viewport.width / viewport.height)
+
+    // Vince il lato che stringe di più: su canvas alto e stretto comanda la
+    // larghezza, su canvas basso e largo comanda l'altezza.
+    const s = Math.min((frameH * FILL) / size.y, (frameW * FILL) / size.x)
+    // Compenso il centro della bbox così, dopo la scala, finisce sull'origine.
+    return { scale: s, position: [-s * center.x, -s * center.y, -s * center.z] }
+  }, [modelBox, camera, viewport])
 
   // Action attiva corrente (per gestire le crossfade).
   const activeActionRef = useRef(null)
