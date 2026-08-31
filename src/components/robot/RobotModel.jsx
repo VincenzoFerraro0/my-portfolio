@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import * as THREE from 'three'
@@ -20,10 +20,58 @@ const EMISSIVE_RATIO = 0.15
 // Nome del materiale colorato dentro il .glb (gli altri sono grigio e nero).
 const ACCENT_MATERIAL = 'Main'
 
-// Frazione del frame occupata dal robot: il resto è aria ai bordi. Il margine
-// non è solo estetico — la bbox è quella a riposo, mentre Jump, Wave e Dance
-// escono dalla sagoma, e devono restare dentro l'inquadratura.
-const FILL = 0.8
+// Frazione del frame occupata dal robot. La bounding box su cui si calcola è
+// quella reale della clip in corso, quindi qui serve solo aria estetica.
+const FILL = 0.9
+// Pose campionate per clip per ricavarne l'ingombro massimo.
+const POSE_SAMPLES = 16
+// Costanti di tempo (secondi) dell'adattamento dell'inquadratura. Allargare è
+// molto più rapido di richiudere: una posa che sbuca (Jump sale del 36% sopra
+// la sagoma a riposo) è già dentro al frame prima dell'apice, e il ritorno
+// resta morbido invece di scattare.
+const ZOOM_OUT_TAU = 0.12
+const ZOOM_IN_TAU = 0.4
+
+// Ingombro massimo di una clip: campiono la posa a intervalli regolari e
+// unisco le bounding box. Sulle skinned mesh computeBoundingBox() applica le
+// trasformazioni delle ossa, quindi la box segue davvero la deformazione —
+// senza, si misurerebbe sempre e solo la posa a riposo.
+//
+// Il risultato è nello spazio di `root`, cioè al netto di scala e posizione
+// che il framing stesso applica: altrimenti il calcolo si morderebbe la coda.
+function measureClipBounds(root, meshes, mixer, clip) {
+  const box = new THREE.Box3()
+  const meshBox = new THREE.Box3()
+  const meshToRoot = new THREE.Matrix4()
+  const rootInverse = new THREE.Matrix4()
+
+  mixer.stopAllAction()
+  const action = mixer.clipAction(clip)
+  action.reset().play()
+  action.paused = true
+
+  for (let i = 0; i < POSE_SAMPLES; i++) {
+    action.time = clip.duration * (i / (POSE_SAMPLES - 1))
+    mixer.update(0)
+    root.updateMatrixWorld(true)
+    rootInverse.copy(root.matrixWorld).invert()
+
+    for (const mesh of meshes) {
+      if (mesh.isSkinnedMesh) {
+        mesh.computeBoundingBox()
+        meshBox.copy(mesh.boundingBox)
+      } else {
+        if (!mesh.geometry.boundingBox) mesh.geometry.computeBoundingBox()
+        meshBox.copy(mesh.geometry.boundingBox)
+      }
+      meshToRoot.multiplyMatrices(rootInverse, mesh.matrixWorld)
+      box.union(meshBox.applyMatrix4(meshToRoot))
+    }
+  }
+
+  mixer.stopAllAction()
+  return box
+}
 
 // Osserva la classe `dark` su document.documentElement e ritorna lo stato.
 function useIsDark() {
@@ -56,38 +104,73 @@ export default function RobotModel() {
 
   const { state, emoteSignal, expressions } = useRobotControls()
 
-  const camera = useThree((state) => state.camera)
-  const viewport = useThree((state) => state.size)
+  const camera = useThree((s) => s.camera)
+  const viewport = useThree((s) => s.size)
 
-  // Bounding box reale del modello a riposo: costa una traversata, quindi la
-  // calcolo una volta sola e non a ogni resize del canvas.
-  const modelBox = useMemo(() => {
-    const box = new THREE.Box3().setFromObject(scene)
-    return { size: box.getSize(new THREE.Vector3()), center: box.getCenter(new THREE.Vector3()) }
+  // Clip su cui è calcolata l'inquadratura: non è sempre `state`, perché
+  // durante un'emote comanda l'emote.
+  const [framedClip, setFramedClip] = useState(state)
+
+  const meshes = useMemo(() => {
+    const found = []
+    scene.traverse((obj) => {
+      if (obj.isMesh) found.push(obj)
+    })
+    return found
   }, [scene])
 
-  // Fit-to-frame: invece di una scala fissa, calcolo quanto è grande il frame
-  // alla distanza del robot e lo riscalo per riempirlo. Così quando il canvas
-  // si restringe (pannello aperto) il robot resta grande quanto lo spazio
-  // concede, invece di rimpicciolirsi due volte.
-  //
-  // Lo centro sull'ORIGINE, dove punta la camera (vedi CameraLookAt): il robot
-  // è sempre centrato nel frame e la testa non viene mai tagliata.
-  const { scale, position } = useMemo(() => {
-    const { size, center } = modelBox
-    if (size.x <= 0 || size.y <= 0) return { scale: 1, position: [0, 0, 0] }
+  // Mixer dedicato alla misura: mettendo in posa il modello con quello di
+  // rendering gli sballerei tempi e fade delle clip in corso.
+  const measureMixer = useMemo(() => new THREE.AnimationMixer(scene), [scene])
+
+  // Misurare costa una passata sui vertici, quindi lo faccio una volta per
+  // clip e solo quando quella clip serve davvero.
+  const boundsCache = useRef(new Map())
+  const getClipBounds = useCallback(
+    (name) => {
+      const cached = boundsCache.current.get(name)
+      if (cached) return cached
+      const clip = THREE.AnimationClip.findByName(animations, name)
+      if (!clip || !group.current) return null
+      const box = measureClipBounds(group.current, meshes, measureMixer, clip)
+      boundsCache.current.set(name, box)
+      return box
+    },
+    [animations, meshes, measureMixer],
+  )
+
+  // Inquadratura di destinazione, riletta a ogni frame dal lerp qui sotto.
+  const framing = useRef(null)
+  const framed = useRef(false)
+
+  // Fit-to-frame: calcolo quanto è grande il frame alla distanza del robot e
+  // scalo il modello perché lo riempia. Vince il lato che stringe di più, così
+  // il robot resta grande quanto lo spazio concede senza mai uscire.
+  // Lo centro sull'ORIGINE, dove punta la camera (vedi CameraLookAt).
+  useLayoutEffect(() => {
+    const box = getClipBounds(framedClip)
+    if (!box) return
+
+    const size = box.getSize(new THREE.Vector3())
+    const center = box.getCenter(new THREE.Vector3())
+    if (size.x <= 0 || size.y <= 0) return
 
     // Estensione del frame sul piano che passa per l'origine.
     const distance = camera.position.length()
     const frameH = 2 * distance * Math.tan((camera.fov * Math.PI) / 360)
     const frameW = frameH * (viewport.width / viewport.height)
 
-    // Vince il lato che stringe di più: su canvas alto e stretto comanda la
-    // larghezza, su canvas basso e largo comanda l'altezza.
-    const s = Math.min((frameH * FILL) / size.y, (frameW * FILL) / size.x)
-    // Compenso il centro della bbox così, dopo la scala, finisce sull'origine.
-    return { scale: s, position: [-s * center.x, -s * center.y, -s * center.z] }
-  }, [modelBox, camera, viewport])
+    const scale = Math.min((frameH * FILL) / size.y, (frameW * FILL) / size.x)
+    const position = new THREE.Vector3(-center.x, -center.y, -center.z).multiplyScalar(scale)
+    framing.current = { scale, position }
+
+    // Al primo montaggio niente transizione: si parte già inquadrati.
+    if (!framed.current && group.current) {
+      group.current.scale.setScalar(scale)
+      group.current.position.copy(position)
+      framed.current = true
+    }
+  }, [getClipBounds, framedClip, camera, viewport])
 
   // Action attiva corrente (per gestire le crossfade).
   const activeActionRef = useRef(null)
@@ -154,7 +237,9 @@ export default function RobotModel() {
     })
   }, [scene, isDark])
 
-  // Helper: crossfade verso una clip qualsiasi.
+  // Helper: crossfade verso una clip qualsiasi. Il framing segue la clip, così
+  // pose ingombranti come Jump o Death allargano l'inquadratura invece di
+  // uscirne tagliate.
   const fadeTo = (name, duration) => {
     if (!actions) return
     const next = actions[name]
@@ -163,6 +248,7 @@ export default function RobotModel() {
     if (prev && prev !== next) prev.fadeOut(duration)
     next.reset().setEffectiveTimeScale(1).setEffectiveWeight(1).fadeIn(duration).play()
     activeActionRef.current = next
+    setFramedClip(name)
   }
 
   // Cambio di stato base dal pannello → crossfade verso la nuova clip.
@@ -191,9 +277,20 @@ export default function RobotModel() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [emoteSignal.nonce, actions])
 
-  // Applica i valori degli slider espressioni ai morph target ad ogni frame.
-  // Scrive su tutti i mesh che hanno almeno una morph rilevante.
-  useFrame(() => {
+  useFrame((_, delta) => {
+    // Inquadratura: avvicinamento esponenziale al target, indipendente dal
+    // frame rate.
+    const g = group.current
+    const target = framing.current
+    if (g && target) {
+      const tau = target.scale < g.scale.x ? ZOOM_OUT_TAU : ZOOM_IN_TAU
+      const k = 1 - Math.exp(-delta / tau)
+      g.scale.setScalar(THREE.MathUtils.lerp(g.scale.x, target.scale, k))
+      g.position.lerp(target.position, k)
+    }
+
+    // Applica i valori degli slider espressioni ai morph target.
+    // Scrive su tutti i mesh che hanno almeno una morph rilevante.
     for (const { mesh, idx } of faceMeshesRef.current) {
       const inf = mesh.morphTargetInfluences
       if (!inf) continue
@@ -205,8 +302,12 @@ export default function RobotModel() {
   })
 
   return (
-    <group ref={group} position={position} rotation={[0, -0.35, 0]} scale={scale}>
-      <primitive object={scene} />
+    <group ref={group}>
+      {/* La rotazione sta su un gruppo interno: quello esterno porta solo
+          scala e posizione del framing, che vengono misurate al netto suo. */}
+      <group rotation={[0, -0.35, 0]}>
+        <primitive object={scene} />
+      </group>
     </group>
   )
 }
